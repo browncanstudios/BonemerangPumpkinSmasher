@@ -10,4 +10,4 @@ script = ExtResource( 3 )
 [node name="Ghost" parent="." instance=ExtResource( 2 )]
 
 [node name="Pumpkin" parent="." instance=ExtResource( 1 )]
-position = Vector2( -5, 14 )
+position = Vector2( 8, 14 )

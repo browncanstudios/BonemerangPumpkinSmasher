@@ -4,8 +4,15 @@ signal collected_bone
 
 export var speed = 100
 
-var velocity = Vector2(speed, 0.0)
-var bones = 3
+var velocity
+var bones
+
+func soft_reset():
+	velocity = Vector2(speed, 0)
+	bones = 3
+
+func _ready():
+	soft_reset()
 
 func _physics_process(_delta):
 	# vertical movement (using analog joystick or buttons)
