@@ -1,3 +1,5 @@
+# TODO: if alive for too long, start blinking and send back to return position
+
 extends RigidBody2D
 
 var rng = RandomNumberGenerator.new()
@@ -46,6 +48,7 @@ func _physics_process(_delta):
 	elif abs(right_horizontal_analog_value) > 0.1:
 		apply_central_impulse(right_horizontal_analog_value * control_magnitude * Vector2(1, 0))
 
+	# TODO: refactor this logic
 	if global_position.y > return_position.y:
 		throwing_state = false
 		# if the bone is in the area where we have real tiles

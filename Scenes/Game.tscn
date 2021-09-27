@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/SpawnArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Tombstone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Font/kongtext.ttf" type="DynamicFontData" id=6]
 
 [sub_resource type="StreamTexture" id=1]
@@ -40,7 +41,7 @@ script = ExtResource( 1 )
 [node name="Map" parent="." instance=ExtResource( 2 )]
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 163, 186 )
+position = Vector2( 160, 192 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -175,6 +176,24 @@ position = Vector2( -160, 96 )
 
 [node name="GhostPumpkinSpawnAreaRight" parent="." instance=ExtResource( 4 )]
 position = Vector2( 480, 96 )
+
+[node name="Tombstone1" parent="." instance=ExtResource( 5 )]
+position = Vector2( 64, 144 )
+
+[node name="Tombstone2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 64, 80 )
+
+[node name="Tombstone3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 160, 144 )
+
+[node name="Tombstone4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 160, 80 )
+
+[node name="Tombstone5" parent="." instance=ExtResource( 5 )]
+position = Vector2( 256, 144 )
+
+[node name="Tombstone6" parent="." instance=ExtResource( 5 )]
+position = Vector2( 256, 80 )
 
 [connection signal="collected_bone" from="Player" to="." method="_on_Player_collected_bone"]
 [connection signal="timeout" from="GhostPumpkinSpawnTimer" to="." method="_on_GhostPumpkinSpawnTimer_timeout"]
