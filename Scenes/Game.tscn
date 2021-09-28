@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
@@ -34,6 +34,12 @@ font_data = ExtResource( 6 )
 [sub_resource type="DynamicFont" id=8]
 size = 8
 font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 144, 16 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 144, 64 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -134,9 +140,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -80.0
-margin_top = -20.0
+margin_top = -32.0
 margin_right = 80.0
-margin_bottom = 20.0
+margin_bottom = 8.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -178,23 +184,41 @@ position = Vector2( -160, 96 )
 position = Vector2( 480, 96 )
 
 [node name="Tombstone1" parent="." instance=ExtResource( 5 )]
-position = Vector2( 64, 144 )
+position = Vector2( 64, 132 )
 
 [node name="Tombstone2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 64, 80 )
+position = Vector2( 64, 68 )
 
 [node name="Tombstone3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 160, 144 )
+position = Vector2( 160, 132 )
 
 [node name="Tombstone4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 160, 80 )
+position = Vector2( 160, 68 )
 
 [node name="Tombstone5" parent="." instance=ExtResource( 5 )]
-position = Vector2( 256, 144 )
+position = Vector2( 256, 132 )
 
 [node name="Tombstone6" parent="." instance=ExtResource( 5 )]
-position = Vector2( 256, 80 )
+position = Vector2( 256, 68 )
+
+[node name="LowerArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerArea"]
+position = Vector2( 160, 192 )
+shape = SubResource( 9 )
+
+[node name="UpperArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperArea"]
+position = Vector2( 160, 96 )
+shape = SubResource( 10 )
 
 [connection signal="collected_bone" from="Player" to="." method="_on_Player_collected_bone"]
 [connection signal="timeout" from="GhostPumpkinSpawnTimer" to="." method="_on_GhostPumpkinSpawnTimer_timeout"]
 [connection signal="timeout" from="GameTimer" to="." method="_on_GameTimer_timeout"]
+[connection signal="body_entered" from="LowerArea" to="." method="_on_LowerArea_body_entered"]
+[connection signal="body_entered" from="UpperArea" to="." method="_on_UpperArea_body_entered"]

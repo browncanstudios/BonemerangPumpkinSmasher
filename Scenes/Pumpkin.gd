@@ -7,5 +7,6 @@ func die():
 
 func _on_Pumpkin_body_entered(body):
 	if body.is_in_group("Bone"):
-		emit_signal("pumpkin_smashed")
-		die()
+		if body.throwing_state:
+			emit_signal("pumpkin_smashed")
+			die()

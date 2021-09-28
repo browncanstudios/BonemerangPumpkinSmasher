@@ -78,3 +78,12 @@ func _on_GameTimer_timeout():
 		$GameTimer.stop()
 		$GhostPumpkinSpawnTimer.stop()
 		$CanvasLayer/GameOverContainer.visible = true
+
+func _on_UpperArea_body_entered(body):
+	if body.is_in_group("Bone"):
+		body.has_entered_upper_area = true
+
+func _on_LowerArea_body_entered(body):
+	if body.is_in_group("Bone"):
+		if body.has_entered_upper_area:
+			body.dampen()
