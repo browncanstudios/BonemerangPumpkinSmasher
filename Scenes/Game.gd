@@ -5,6 +5,7 @@ var rng = RandomNumberGenerator.new()
 var pumpkins_smashed
 var initial_game_time
 var time_remaining
+var started = false
 
 func soft_reset():
 	$Player.soft_reset()
@@ -21,16 +22,22 @@ func soft_reset():
 	$CanvasLayer/HUD/HBoxContainer/BoneCounterContainer/Label.set_text("x" + str($Player.bones))
 	$CanvasLayer/TimerLabel.set_text("%02d" % time_remaining)
 	$CanvasLayer/GameOverContainer.visible = false
+	$CanvasLayer/StartContainer.visible = false
 
 	$GameTimer.start()
 	$GhostPumpkinSpawnTimer.start()
 
 func _ready():
 	rng.randomize()
-	soft_reset()
+	$CanvasLayer/StartContainer.visible = true
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_select"):
+		if !started:
+			started = true
+			soft_reset()
+			return
+
 		if time_remaining == 0:
 			# game over, this will reset/restart/retry
 			soft_reset()
