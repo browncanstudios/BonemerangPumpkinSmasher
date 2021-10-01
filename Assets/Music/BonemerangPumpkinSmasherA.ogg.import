@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/BonemerangPumpkinSmasherA.ogg-2f0062ca0fc177102589739a298b420d.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/BonemerangPumpkinSmasherA.ogg"
+dest_files=[ "res://.import/BonemerangPumpkinSmasherA.ogg-2f0062ca0fc177102589739a298b420d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

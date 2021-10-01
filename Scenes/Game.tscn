@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Map.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Scenes/SpawnArea.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Tombstone.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Font/kongtext.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Assets/Music/BonemerangPumpkinSmasherA.ogg" type="AudioStream" id=7]
 
 [sub_resource type="StreamTexture" id=1]
 load_path = "res://.import/pumpkin.png-eaff5cebe7c305f05ac9e3c96da19a37.stex"
@@ -255,6 +256,10 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpperArea"]
 position = Vector2( 160, 96 )
 shape = SubResource( 12 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+autoplay = true
 
 [connection signal="collected_bone" from="Player" to="." method="_on_Player_collected_bone"]
 [connection signal="timeout" from="GhostPumpkinSpawnTimer" to="." method="_on_GhostPumpkinSpawnTimer_timeout"]
