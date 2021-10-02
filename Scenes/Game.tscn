@@ -259,6 +259,7 @@ shape = SubResource( 12 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -6.0
 autoplay = true
 
 [connection signal="collected_bone" from="Player" to="." method="_on_Player_collected_bone"]

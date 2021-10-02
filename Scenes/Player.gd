@@ -44,7 +44,7 @@ func _physics_process(_delta):
 		if collision.collider.is_in_group("Bone"):
 			# this "will_die" is necessary because die() doesn't happen right away
 			# but the same Bone might have had multiple "collisions" with Player this frame
-			if !collision.collider.will_die:
-				collision.collider.die()
+			if !collision.collider.was_collected:
+				collision.collider.was_collected()
 				bones += 1
 				emit_signal("collected_bone")

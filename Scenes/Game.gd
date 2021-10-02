@@ -1,5 +1,7 @@
 extends Node2D
 
+var sfx_throw = preload("res://Assets/SFX/sfx-throw.wav")
+
 var rng = RandomNumberGenerator.new()
 
 var pumpkins_smashed
@@ -50,6 +52,9 @@ func _process(_delta):
 			# decrement the number of bones the player has and update our bone label
 			$Player.bones -= 1
 			$CanvasLayer/HUD/HBoxContainer/BoneCounterContainer/Label.set_text("x" + str($Player.bones))
+
+			$Player/ThrowStreamPlayer.stream = sfx_throw
+			$Player/ThrowStreamPlayer.play()
 
 func _on_Pumpkin_pumpkin_smashed():
 	pumpkins_smashed += 1

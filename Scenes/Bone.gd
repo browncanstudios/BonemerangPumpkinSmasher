@@ -2,6 +2,9 @@
 
 extends RigidBody2D
 
+var sfx_hit = preload("res://Assets/SFX/sfx-hit.wav")
+var sfx_collected = preload("res://Assets/SFX/sfx-hit.wav")
+
 var rng = RandomNumberGenerator.new()
 var control_magnitude = 5
 var return_magnitude = 0.1
@@ -10,7 +13,7 @@ var return_position = Vector2(160, 120)
 var throwing_state = false
 var returning_state = false
 var has_entered_upper_area = false
-var will_die = false
+var was_collected = false
 
 func dampen():
 	throwing_state = false
@@ -18,8 +21,14 @@ func dampen():
 	set_angular_damp(10)
 	$ReturnTimer.start()
 
+func was_collected():
+	was_collected = true
+	play_sfx_collected()
+	set_collision_layer(0)
+	set_collision_mask(0)
+	visible = false
+
 func die():
-	will_die = true
 	get_tree().queue_delete(self)
 
 func init(glo_pos):
@@ -64,7 +73,10 @@ func _physics_process(delta):
 
 func _on_Bone_body_entered(body):
 	if body.is_in_group("Tombstone"):
+		play_sfx_hit()
 		dampen()
+	if body.is_in_group("Bone"):
+		play_sfx_hit()
 
 func _on_ReturnTimer_timeout():
 	returning_state = true
@@ -75,8 +87,23 @@ func _on_ReturnTimer_timeout():
 	$BlinkTimer.start()
 
 func _on_BlinkTimer_timeout():
+	# quick hack to prevent a collected bone from flashing
+	if was_collected:
+		return
+
 	if returning_state:
 		visible = (visible == false)
 	else:
 		visible = true
 		$BlinkTimer.stop()
+
+func play_sfx_hit():
+		$HitStreamPlayer.stream = sfx_hit
+		$HitStreamPlayer.play()
+
+func play_sfx_collected():
+		$CollectedStreamPlayer.stream = sfx_collected
+		$CollectedStreamPlayer.play()
+
+func _on_CollectedStreamPlayer_finished():
+	die()
