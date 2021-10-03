@@ -28,6 +28,7 @@ func soft_reset():
 
 	$GameTimer.start()
 	$GhostPumpkinSpawnTimer.start()
+	$GhostSuperPumpkinSpawnTimer.start()
 
 func _ready():
 	rng.randomize()
@@ -89,6 +90,7 @@ func _on_GameTimer_timeout():
 	if time_remaining == 0:
 		$GameTimer.stop()
 		$GhostPumpkinSpawnTimer.stop()
+		$GhostSuperPumpkinSpawnTimer.stop()
 		$CanvasLayer/GameOverContainer.visible = true
 
 func _on_UpperArea_body_entered(body):
@@ -99,3 +101,13 @@ func _on_LowerArea_body_entered(body):
 	if body.is_in_group("Bone"):
 		if body.has_entered_upper_area:
 			body.dampen()
+
+func _on_GhostSuperPumpkinSpawnTimer_timeout():
+	# spawn our ghost-superpumpkin object
+	var ghost_superpumpkin_instance = load("res://Scenes/GhostSuperPumpkin.tscn").instance()
+	add_child(ghost_superpumpkin_instance)
+	ghost_superpumpkin_instance.get_node("SuperPumpkin").connect("super_pumpkin_smashed", self, "_on_SuperPumpkin_super_pumpkin_smashed")
+
+func _on_SuperPumpkin_super_pumpkin_smashed():
+	pumpkins_smashed += 5
+	$CanvasLayer/HUD/HBoxContainer/SmashedPumpkinsCounterContainer/Label.set_text("x" + "%02d" % pumpkins_smashed)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Ghost.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/SuperPumpkin.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/GhostSuperPumpkin.gd" type="Script" id=3]
+
+[node name="GhostSuperPumpkin" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Ghost" parent="." instance=ExtResource( 1 )]
+position = Vector2( -8, -14 )
+
+[node name="SuperPumpkin" parent="." instance=ExtResource( 2 )]
